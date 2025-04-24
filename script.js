@@ -1,19 +1,14 @@
-const foods = [
-    "カレーライス", 
-    "ラーメン", 
-    "お寿司", 
-    "焼肉", 
-    "うどん", 
-    "オムライス", 
-    "タコライス", 
-    "チャーハン", 
-    "ピザ", 
-    "サンドイッチ"
-  ];
-  
-  function decideDinner() {
-    const randomIndex = Math.floor(Math.random() * foods.length);
-    const selected = foods[randomIndex];
-    document.getElementById("result").textContent = `今日のごはんは… ${selected}！`;
+function decideDinner() {
+  const checkboxes = document.querySelectorAll('input[name="food"]:checked');
+  const selectedFoods = Array.from(checkboxes).map(cb => cb.value);
+
+  if (selectedFoods.length === 0) {
+    document.getElementById("result").textContent = "何か選んでください！";
+    return;
   }
-  
+
+  const randomIndex = Math.floor(Math.random() * selectedFoods.length);
+  const selected = selectedFoods[randomIndex];
+
+  document.getElementById("result").textContent = `今日のごはんは… ${selected}！`;
+}
